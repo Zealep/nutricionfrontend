@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "dairyfrontend": {
+        "nutricionfrontend": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:application": {
@@ -63,10 +63,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "buildTarget": "dairyfrontend:build:production"
+                            "buildTarget": "nutricionfrontend:build:production"
                         },
                         "development": {
-                            "buildTarget": "dairyfrontend:build:development"
+                            "buildTarget": "nutricionfrontend:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "buildTarget": "dairyfrontend:build"
+                        "buildTarget": "nutricionfrontend:build"
                     }
                 },
                 "test": {

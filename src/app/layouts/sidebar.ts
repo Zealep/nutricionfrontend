@@ -1,9 +1,28 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { slideDownUp } from '../shared/animations';
-import { MenuService } from '../service/menu.service';
+import { Menu } from '../model/menu';
+
+const initialMenus: Menu[] = [
+    {
+        nombre: 'Pacientes',
+        icono: 'fa fa-users',
+        url: '/pacientes',
+    },
+    {
+        nombre: 'Mantenimiento',
+        icono: 'fa fa-cog',
+        url: '',
+        subMenus: [{ nombre: 'Alergias', url: '/alergias' }],
+    },
+    {
+        nombre: 'Toro',
+        icono: 'fa fa-file',
+        url: '/toro',
+    },
+];
 
 @Component({
     moduleId: module.id,
@@ -16,12 +35,11 @@ export class SidebarComponent {
     store: any;
     activeDropdown: string[] = [];
     parentDropdown: string = '';
-    menuItems: any[] = [];
+    menuItems = signal<Menu[]>(initialMenus);
     constructor(
         public translate: TranslateService,
         public storeData: Store<any>,
         public router: Router,
-        private menuService: MenuService
     ) {
         this.initStore();
     }
@@ -34,7 +52,6 @@ export class SidebarComponent {
     }
 
     ngOnInit() {
-        this.obtenerMenu();
         this.setActiveDropdown();
     }
 
@@ -67,12 +84,5 @@ export class SidebarComponent {
         } else {
             this.activeDropdown.push(name);
         }
-    }
-
-    obtenerMenu(){
-        this.menuService.getAllByRol().subscribe((res: any) => {
-            console.log(res);
-            this.menuItems = res;
-        })
     }
 }

@@ -1,13 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Protocolo } from '../model/protocolo';
+
 import { catchError, throwError } from 'rxjs';
-import { Inseminacion } from '../model/inseminacion';
-import { Inseminador } from '../model/inseminador';
-import { TipoInseminacion } from '../model/tipo-inseminacion';
-import { TipoRaza } from '../model/tipo-raza';
 import { Toro } from '../model/toro';
+
 
 @Injectable({
   providedIn: 'root'

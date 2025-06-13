@@ -1,5 +1,6 @@
 import { TipoRaza } from "./tipo-raza";
 
+
 export interface Toro{
     id: number;
     codigo: string;

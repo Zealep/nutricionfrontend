@@ -7,8 +7,9 @@ import { NgxCustomModalComponent } from 'ngx-custom-modal';
 import { firstValueFrom } from 'rxjs';
 import { TipoRaza } from 'src/app/model/tipo-raza';
 import { Toro } from 'src/app/model/toro';
-import { TipoRazaService } from 'src/app/service/tipo-raza.service';
 import { ToroService } from 'src/app/service/toro.service';
+
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,7 +24,6 @@ export class ToroComponent {
 
     loading = false;
     private readonly toroService = inject(ToroService);
-    private readonly tipoRazaService = inject(TipoRazaService);
     private readonly fb = inject(FormBuilder);
     toros: Toro[] = [];
     @ViewChild ('datatable') datatable: any;
@@ -51,7 +51,6 @@ export class ToroComponent {
     }
 
     ngOnInit(): void {
-        this.getAllTipoRaza();
         this.getAll();
     }
 
@@ -61,11 +60,7 @@ export class ToroComponent {
         });
     }
 
-    getAllTipoRaza() {
-        this.tipoRazaService.getAll().subscribe((data) => {
-            this.tiposRaza = data;
-        });
-    }
+
 
     editar(row: Toro | null) {
         this.addModal.open();

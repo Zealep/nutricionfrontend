@@ -16,48 +16,102 @@
             </div>
             <ng-scrollbar class="relative !h-[calc(100vh-80px)]" appearance="compact">
                 <ul class="relative space-y-0.5 p-4 py-0 font-semibold">
-                    <ng-container *ngTemplateOutlet="renderMenu; context: { $implicit: menuItems }"></ng-container>
-                </ul>
+                    @for (item of menuItems(); track item.nombre) {
+                        @if (item.subMenus && item.subMenus.length > 0) {
+                            <li class="accordion menu nav-item">
+                                <button
+                                    type="button"
+                                    class="nav-link group w-full"
+                                    [ngClass]="{ active: activeDropdown.includes(item.nombre) }"
+                                    (click)="toggleAccordion(item.nombre)"
+                                >
+                                    <div class="flex items-center">
+                                        <i *ngIf="item.icono" [class]="item.icono + ' w-5 h-5 mr-2 text-primary align-middle'"></i>
+                                        <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
+                                            {{ item.nombre }}
+                                        </span>
+                                    </div>
+                                    <div [ngClass]="{ 'rtl:rotate-90 -rotate-90': !activeDropdown.includes(item.nombre) }">
+                                        <icon-caret-down />
+                                    </div>
+                                </button>
+                                <div [@slideDownUp]="!activeDropdown.includes(item.nombre)" class="accordion-content">
+                                    <ul class="sub-menu text-gray-500">
+                                        @for (sub of item.subMenus; track sub.nombre) {
+                                            @if (sub.subMenus && sub.subMenus.length > 0) {
+                                                <li class="accordion menu nav-item">
+                                                    <button
+                                                        type="button"
+                                                        class="nav-link group w-full"
+                                                        [ngClass]="{ active: activeDropdown.includes(sub.nombre) }"
+                                                        (click)="toggleAccordion(sub.nombre)"
+                                                    >
+                                                        <div class="flex items-center">
+                                                            <i *ngIf="sub.icono" [class]="sub.icono + ' w-5 h-5 mr-2 text-primary align-middle'"></i>
+                                                            <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
+                                                                {{ sub.nombre }}
+                                                            </span>
+                                                        </div>
+                                                        <div [ngClass]="{ 'rtl:rotate-90 -rotate-90': !activeDropdown.includes(sub.nombre) }">
+                                                            <icon-caret-down />
+                                                        </div>
+                                                    </button>
+                                                    <div [@slideDownUp]="!activeDropdown.includes(sub.nombre)" class="accordion-content">
+                                                        <ul class="sub-menu text-gray-500">
+                                                            @for (sub2 of sub.subMenus; track sub2.nombre) {
+                                                                @if (sub2.url) {
+                                                                    <li class="nav-item">
+                                                                        <a [routerLink]="sub2.url" routerLinkActive="active" (click)="toggleMobileMenu()">
+                                                                            <div class="flex items-center">
+                                                                                <i *ngIf="sub2.icono" [class]="sub2.icono + ' w-5 h-5 mr-2 text-primary'"></i>
+                                                                                <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
+                                                                                    {{ sub2.nombre }}
+                                                                                </span>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                } @else {
+                                                                    <!-- Puedes seguir anidando si tienes más niveles -->
+                                                                }
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            } @else {
 
-                <ng-template #renderMenu let-items>
-    <ng-container *ngFor="let item of items">
-        <li class="accordion menu nav-item" *ngIf="item.subMenus && item.subMenus.length > 0; else singleMenu">
-            <button
-                type="button"
-                class="nav-link group w-full"
-                [ngClass]="{ active: activeDropdown.includes(item.nombre) }"
-                (click)="toggleAccordion(item.nombre)"
-            >
-                <div class="flex items-center">
-                    <i *ngIf="item.icono" [class]="item.icono + ' w-5 h-5 mr-2 text-primary align-middle'" ></i>
-                    <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
-                        {{ item.nombre }}
-                    </span>
-                </div>
-                <div [ngClass]="{ 'rtl:rotate-90 -rotate-90': !activeDropdown.includes(item.nombre) }">
-                    <icon-caret-down />
-                </div>
-            </button>
-            <div [@slideDownUp]="!activeDropdown.includes(item.nombre)" class="accordion-content">
-                <ul class="sub-menu text-gray-500">
-                    <ng-container *ngTemplateOutlet="renderMenu; context: { $implicit: item.subMenus }"></ng-container>
+                                                @if (sub.url) {
+                                                    <li class="nav-item">
+                                                        <a [routerLink]="sub.url" routerLinkActive="active" (click)="toggleMobileMenu()">
+                                                            <div class="flex items-center">
+                                                                <i *ngIf="sub.icono" [class]="sub.icono + ' w-5 h-5 mr-2 text-primary'"></i>
+                                                                <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
+                                                                    {{ sub.nombre }}
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                }
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                        } @else {
+                            @if (item.url) {
+                                <li class="nav-item">
+                                    <a [routerLink]="item.url" routerLinkActive="active" (click)="toggleMobileMenu()">
+                                        <div class="flex items-center">
+                                            <i *ngIf="item.icono" [class]="item.icono + ' w-5 h-5 mr-2 text-primary'"></i>
+                                            <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
+                                                {{ item.nombre }}
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    }
                 </ul>
-            </div>
-        </li>
-        <ng-template #singleMenu>
-            <li class="nav-item" *ngIf="item.url">
-                <a [routerLink]="item.url" routerLinkActive="active" (click)="toggleMobileMenu()">
-                    <div class="flex items-center">
-                        <i *ngIf="item.icono" [class]="item.icono + ' w-5 h-5 mr-2 text-primary'"></i>
-                        <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
-                            {{ item.nombre }}
-                        </span>
-                    </div>
-                </a>
-            </li>
-        </ng-template>
-    </ng-container>
-</ng-template>
             </ng-scrollbar>
         </div>
     </nav>
