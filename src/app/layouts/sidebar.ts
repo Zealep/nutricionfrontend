@@ -15,12 +15,13 @@ const initialMenus: Menu[] = [
         nombre: 'Mantenimiento',
         icono: 'fa fa-cog',
         url: '',
-        subMenus: [{ nombre: 'Alergias', url: '/alergias' }],
-    },
-    {
-        nombre: 'Toro',
-        icono: 'fa fa-file',
-        url: '/toro',
+        subMenus: [
+            { nombre: 'Alergias', url: '/alergias' },
+            { nombre: 'Patologias', url: '/patologias' },
+            { nombre: 'Medicamentos', url: '/alergias' },
+            { nombre: 'Objetivos', url: '/objetivos' },
+            { nombre: 'Tiempo Comida', url: '/alergias' },
+        ],
     },
 ];
 

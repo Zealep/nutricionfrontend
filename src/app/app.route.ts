@@ -11,7 +11,7 @@ export const routes: Routes = [
         component: AppLayout,
         children: [
             // dashboard
-            { path:'toro', loadComponent:()=> import('./mantenimiento/toro/toro.component').then((c)=>c.ToroComponent)},
+            { path:'alergias', loadComponent:()=> import('./mantenimiento/alergias/alergias.component').then((c)=>c.AlergiasComponent)},
         ],
     },
 
