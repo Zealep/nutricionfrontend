@@ -7,6 +7,7 @@ import { NgxCustomModalComponent } from 'ngx-custom-modal';
 import { firstValueFrom } from 'rxjs';
 import { Alergia } from 'src/app/model/alergias';
 import { AlergiaService } from 'src/app/service/alergia.service';
+import { ToastService } from 'src/app/service/toast.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,12 +21,12 @@ export class AlergiasComponent implements OnInit {
     loading = false;
     private readonly alergiasService = inject(AlergiaService);
     private readonly fb = inject(FormBuilder);
+    private toastService = inject(ToastService);
     alergias = signal<Alergia[]>([]);
     @ViewChild('datatable') datatable: any;
     @ViewChild('addModal') addModal!: NgxCustomModalComponent;
     params!: FormGroup;
     search = '';
-    tipo: any;
 
     cols = [
         { field: 'id', title: 'ID', isUnique: true },
@@ -63,7 +64,7 @@ export class AlergiasComponent implements OnInit {
 
     guardar() {
         if (this.params.controls['descripcion'].errors) {
-            this.showMessage('La descripcion es requerida.', 'error');
+            this.toastService.showMessage('La descripcion es requerida.', 'error');
             return;
         }
 

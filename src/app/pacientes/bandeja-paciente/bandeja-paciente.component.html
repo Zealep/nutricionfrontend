@@ -2,12 +2,12 @@
     <div class="panel border-[#e0e6ed] px-0 pb-1.5 dark:border-[#1b2e4b]">
         <div class="datatable invoice-table">
             <div class="datatable invoice-table">
-                <h2 class="text-xl ml-4 mb-2">Gestión de Toros</h2>
+                <h2 class="text-xl ml-4 mb-2">Gestión de Pacientes</h2>
                 <div class="mb-4.5 flex flex-col gap-5 px-5 md:flex-row md:items-center">
                     <div class="flex items-center gap-2">
-                        <button type="button" class="btn btn-primary" (click)="editar(null)">
+                        <button type="button" class="btn btn-primary" (click)="nuevo()">
                             <i class="fa fa-user-plus ltr:mr-2 rtl:ml-2"></i>
-                            Agregar Toro
+                            Agregar Paciente
                         </button>
                     </div>
                     <div>
@@ -17,7 +17,7 @@
 
                 <ng-datatable
                     #datatable
-                    [rows]="toros"
+                    [rows]="pacientes()"
                     [columns]="cols"
                     [sortable]="true"
                     [search]="search"
@@ -33,68 +33,80 @@
                         <a class="font-semibold text-primary underline hover:no-underline">#{{ value.id }}</a>
                     </ng-template>
 
-                    <ng-template slot="codigo" let-value="data">
-                        <div class="font-semibold">{{ value.codigo }}</div>
+                    <ng-template slot="apellidos" let-value="data">
+                        <div class="font-semibold">{{ value.apellidos }}</div>
                     </ng-template>
 
-                    <ng-template slot="nombre" let-value="data">
-                        <div class="font-semibold">{{ value.nombre }}</div>
+                    <ng-template slot="nombres" let-value="data">
+                        <div class="font-semibold">{{ value.nombres }}</div>
                     </ng-template>
 
-                    <ng-template slot="tiporaza" let-value="data">
-                        <div class="font-semibold">{{ value.tipoRaza.descripcion }}</div>
+                    <ng-template slot="fechaNacimiento" let-value="data">
+                        <div class="font-semibold">{{ value.fechaNacimiento }}</div>
+                    </ng-template>
+
+                    <ng-template slot="celular" let-value="data">
+                        <div class="font-semibold">{{ value.celular }}</div>
+                    </ng-template>
+
+                    <ng-template slot="correo" let-value="data">
+                        <div class="font-semibold">{{ value.correo }}</div>
                     </ng-template>
 
                     <ng-template slot="acciones" let-value="data">
-
-                        <div>
-
-                            <button type="button" class="hover:text-info" (click)="editar(value)">
-                                <i class="fa fa-edit"></i>
-                            </button>
-
-                            <button type="button" class="hover:text-danger ml-3" (click)="eliminar(value)">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </div>
+                        <div></div>
                     </ng-template>
                 </ng-datatable>
             </div>
         </div>
 
         <!-- add contact modal -->
-        <ngx-custom-modal #addModal class="no-footer" >
+        <ngx-custom-modal #addModal class="no-footer">
             <ng-template #modalHeader>
-                <div class="!font-medium">{{ params.controls['id'].value ? 'Editar Toro' : 'Agregar Toro' }}</div>
+                <div class="!font-medium">Agregar nuevo paciente</div>
             </ng-template>
             <ng-template #modalBody>
                 <form [formGroup]="params" class="text-sm" (ngSubmit)="guardar()" ngNativeValidate>
+                        <div class="mb-5">
+                            <label for="apellidos">Apellidos</label>
+                            <input id="apellidos" type="text" class="form-input" formControlName="apellidos" required/>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="nombres">Nombres</label>
+                            <input id="nombres" type="text" class="form-input" formControlName="nombres" required/>
+                        </div>
+                        <div class="mb-5">
+                            <label for="sexo">Sexo</label>
+                            <div class="flex gap-4">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" formControlName="sexo" class="form-radio" value="Hombre" required/>
+                                    <span class="ml-1">Hombre</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" formControlName="sexo" class="form-radio" value="Mujer" />
+                                    <span class="ml-1">Mujer</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                            <input type="text" mwlFlatpickr [options]="basic" formControlName="fechaNacimiento" class="form-input" placeholder="dd/MM/yyyy" />
+                        </div>
                     <div class="mb-5">
-                        <label for="codigo">Codigo</label>
-                        <input id="codigo" type="text" class="form-input" formControlName="codigo" />
+                        <label for="celular">Celular</label>
+                        <input id="celular" type="text" class="form-input" formControlName="celular" />
                     </div>
+
                     <div class="mb-5">
-                        <label for="nombre">Nombre</label>
-                        <input id="nombre" type="text" class="form-input" formControlName="nombre" />
+                        <label for="correo">Correo</label>
+                        <input id="correo" type="text" class="form-input" formControlName="correo" />
                     </div>
-                    <div class="mb-5">
-                         <label for="tiporaza">Tipo Raza</label>
-                        <ng-select
-                            id="tiporaza"
-                            [items]="tiposRaza"
-                            formControlName="tiporaza"
-                            bindLabel="descripcion"
-                            bindValue="id"
-                            [clearable]="false"
-                            placeholder="Selecciona un tipo de raza"
-                            class="custom-multiselect"
-                            [appendTo]="'body'"
-                        >
-                        </ng-select>
-                    </div>
+
                     <div class="mt-8 flex items-center justify-end">
                         <button type="button" class="btn btn-outline-danger" (click)="addModal.close()">Cancelar</button>
-                        <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4">{{ params.controls['id'].value ? 'Editar' : 'Agregar' }}</button>
+                        <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" (click)="guardar()">Registrar</button>
                     </div>
                 </form>
             </ng-template>
