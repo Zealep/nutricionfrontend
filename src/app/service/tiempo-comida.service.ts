@@ -10,7 +10,7 @@ import { TiempoComida } from '../model/tiempo-comida';
   providedIn: 'root'
 })
 export class TiempoComidaService {
-    URL_BACKEND: string = `${environment.url_api}/objetivos`;
+    URL_BACKEND: string = `${environment.url_api}/tiempo-comidas`;
 
 constructor(private http: HttpClient) { }
 

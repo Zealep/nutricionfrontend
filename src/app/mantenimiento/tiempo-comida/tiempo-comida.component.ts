@@ -1,26 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, Signal, signal, ViewChild } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTableModule } from '@bhplugin/ng-datatable';
-import { NgSelectComponent } from '@ng-select/ng-select';
 import { NgxCustomModalComponent } from 'ngx-custom-modal';
 import { firstValueFrom } from 'rxjs';
-import { Alergia } from 'src/app/model/alergias';
-import { AlergiaService } from 'src/app/service/alergia.service';
+import { TiempoComida } from 'src/app/model/tiempo-comida';
+import { TiempoComidaService } from 'src/app/service/tiempo-comida.service';
 import Swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-alergias',
-    templateUrl: './alergias.component.html',
-    styleUrls: ['./alergias.component.css'],
-    imports: [DataTableModule, CommonModule, FormsModule, NgxCustomModalComponent, ReactiveFormsModule],
+    selector: 'app-tiempo-comida',
     standalone: true,
+    imports: [DataTableModule, CommonModule, FormsModule, NgxCustomModalComponent, ReactiveFormsModule],
+    templateUrl: './tiempo-comida.component.html',
 })
-export class AlergiasComponent implements OnInit {
+export class TiempoComidaComponent {
     loading = false;
-    private readonly alergiasService = inject(AlergiaService);
+    private readonly tiempoComidaService = inject(TiempoComidaService);
     private readonly fb = inject(FormBuilder);
-    alergias = signal<Alergia[]>([]);
+    tiemposComida = signal<TiempoComida[]>([]);
     @ViewChild('datatable') datatable: any;
     @ViewChild('addModal') addModal!: NgxCustomModalComponent;
     params!: FormGroup;
@@ -29,14 +27,14 @@ export class AlergiasComponent implements OnInit {
 
     cols = [
         { field: 'id', title: 'ID', isUnique: true },
-        { field: 'descripcion', title: 'Descripcion' },
+        { field: 'nombre', title: 'Nombre' },
         { field: 'acciones', title: 'Acciones' },
     ];
 
     initForm() {
         this.params = this.fb.group({
             id: [0],
-            descripcion: [''],
+            nombre: [''],
         });
     }
 
@@ -45,41 +43,41 @@ export class AlergiasComponent implements OnInit {
     }
 
     getAll() {
-        this.alergiasService.getAll().subscribe((data) => {
-            this.alergias.set(data);
+        this.tiempoComidaService.getAll().subscribe((data) => {
+            this.tiemposComida.set(data);
         });
     }
 
-    editar(row: Alergia | null) {
+    editar(row: TiempoComida | null) {
         this.addModal.open();
         this.initForm();
         if (row) {
             this.params.setValue({
                 id: row.id,
-                descripcion: row.descripcion,
+                nombre: row.nombre,
             });
         }
     }
 
     guardar() {
-        if (this.params.controls['descripcion'].errors) {
-            this.showMessage('La descripcion es requerida.', 'error');
+        if (this.params.controls['nombre'].errors) {
+            this.showMessage('El nombre es requerido.', 'error');
             return;
         }
 
-        const req: Alergia = {
+        const req: TiempoComida = {
             id: this.params.value.id != 0 ? this.params.value.id : null,
-            descripcion: this.params.value.descripcion,
+            nombre: this.params.value.nombre,
         };
 
-        this.alergiasService.save(req).subscribe((data) => {
+        this.tiempoComidaService.save(req).subscribe((data) => {
             this.getAll();
             this.showMessage('Registro guardado', 'success');
             this.addModal.close();
         });
     }
 
-    eliminar(row: Alergia) {
+    eliminar(row: TiempoComida) {
         Swal.fire({
             title: 'Desea eliminar el registro?',
             showCancelButton: true,
@@ -87,7 +85,7 @@ export class AlergiasComponent implements OnInit {
             icon: 'warning',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await firstValueFrom(this.alergiasService.delete(row.id!));
+                await firstValueFrom(this.tiempoComidaService.delete(row.id!));
                 this.getAll();
                 this.showMessage('Registro Eliminado', 'success');
             }

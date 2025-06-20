@@ -12,6 +12,10 @@ export const routes: Routes = [
         children: [
             // dashboard
             { path:'alergias', loadComponent:()=> import('./mantenimiento/alergias/alergias.component').then((c)=>c.AlergiasComponent)},
+            { path:'patologias', loadComponent:()=> import('./mantenimiento/patologias/patologias.component').then((c)=>c.PatologiasComponent)},
+            { path:'medicamentos', loadComponent:()=> import('./mantenimiento/medicamentos/medicamentos.component').then((c)=>c.MedicamentosComponent)},
+            { path:'objetivos', loadComponent:()=> import('./mantenimiento/objetivos/objetivos.component').then((c)=>c.ObjetivosComponent)},
+            { path:'tiempo-comida', loadComponent:()=> import('./mantenimiento/tiempo-comida/tiempo-comida.component').then((c)=>c.TiempoComidaComponent)},
         ],
     },
 

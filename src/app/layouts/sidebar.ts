@@ -18,9 +18,9 @@ const initialMenus: Menu[] = [
         subMenus: [
             { nombre: 'Alergias', url: '/alergias' },
             { nombre: 'Patologias', url: '/patologias' },
-            { nombre: 'Medicamentos', url: '/alergias' },
+            { nombre: 'Medicamentos', url: '/medicamentos' },
             { nombre: 'Objetivos', url: '/objetivos' },
-            { nombre: 'Tiempo Comida', url: '/alergias' },
+            { nombre: 'Tiempo Comida', url: '/tiempo-comida' },
         ],
     },
 ];

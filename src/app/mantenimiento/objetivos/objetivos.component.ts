@@ -1,26 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, Signal, signal, ViewChild } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTableModule } from '@bhplugin/ng-datatable';
-import { NgSelectComponent } from '@ng-select/ng-select';
 import { NgxCustomModalComponent } from 'ngx-custom-modal';
 import { firstValueFrom } from 'rxjs';
-import { Alergia } from 'src/app/model/alergias';
-import { AlergiaService } from 'src/app/service/alergia.service';
+import { Objetivo } from 'src/app/model/objetivo';
+import { ObjetivoService } from 'src/app/service/objetivo.service';
 import Swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-alergias',
-    templateUrl: './alergias.component.html',
-    styleUrls: ['./alergias.component.css'],
-    imports: [DataTableModule, CommonModule, FormsModule, NgxCustomModalComponent, ReactiveFormsModule],
+    selector: 'app-objetivos',
     standalone: true,
+    imports: [DataTableModule, CommonModule, FormsModule, NgxCustomModalComponent, ReactiveFormsModule],
+    templateUrl: './objetivos.component.html',
 })
-export class AlergiasComponent implements OnInit {
+export class ObjetivosComponent {
     loading = false;
-    private readonly alergiasService = inject(AlergiaService);
+    private readonly objetivoService = inject(ObjetivoService);
     private readonly fb = inject(FormBuilder);
-    alergias = signal<Alergia[]>([]);
+    objetivos = signal<Objetivo[]>([]);
     @ViewChild('datatable') datatable: any;
     @ViewChild('addModal') addModal!: NgxCustomModalComponent;
     params!: FormGroup;
@@ -29,14 +27,24 @@ export class AlergiasComponent implements OnInit {
 
     cols = [
         { field: 'id', title: 'ID', isUnique: true },
+        { field: 'nombre', title: 'Nombre' },
         { field: 'descripcion', title: 'Descripcion' },
+        { field: 'calorias', title: 'Calorias' },
+        { field: 'porcentajeProteinas', title: 'Porcentaje de Proteinas' },
+        { field: 'porcentajeCarbohidratos', title: 'Porcentaje de Carbohidratos' },
+        { field: 'porcentajeGrasas', title: 'Porcentaje de Grasas' },
         { field: 'acciones', title: 'Acciones' },
     ];
 
     initForm() {
         this.params = this.fb.group({
             id: [0],
+            nombre: [''],
             descripcion: [''],
+            calorias: [0],
+            porcentajeProteinas: [0],
+            porcentajeCarbohidratos: [0],
+            porcentajeGrasas: [0],
         });
     }
 
@@ -45,18 +53,23 @@ export class AlergiasComponent implements OnInit {
     }
 
     getAll() {
-        this.alergiasService.getAll().subscribe((data) => {
-            this.alergias.set(data);
+        this.objetivoService.getAll().subscribe((data) => {
+            this.objetivos.set(data);
         });
     }
 
-    editar(row: Alergia | null) {
+    editar(row: Objetivo | null) {
         this.addModal.open();
         this.initForm();
         if (row) {
             this.params.setValue({
                 id: row.id,
+                nombre: row.nombre,
                 descripcion: row.descripcion,
+                calorias: row.calorias,
+                porcentajeProteinas: row.porcentajeProteinas,
+                porcentajeCarbohidratos: row.porcentajeCarbohidratos,
+                porcentajeGrasas: row.porcentajeGrasas,
             });
         }
     }
@@ -67,19 +80,24 @@ export class AlergiasComponent implements OnInit {
             return;
         }
 
-        const req: Alergia = {
+        const req: Objetivo = {
             id: this.params.value.id != 0 ? this.params.value.id : null,
+            nombre: this.params.value.nombre,
             descripcion: this.params.value.descripcion,
+            calorias: this.params.value.calorias,
+            porcentajeProteinas: this.params.value.porcentajeProteinas,
+            porcentajeCarbohidratos: this.params.value.porcentajeCarbohidratos,
+            porcentajeGrasas: this.params.value.porcentajeGrasas,
         };
 
-        this.alergiasService.save(req).subscribe((data) => {
+        this.objetivoService.save(req).subscribe((data) => {
             this.getAll();
             this.showMessage('Registro guardado', 'success');
             this.addModal.close();
         });
     }
 
-    eliminar(row: Alergia) {
+    eliminar(row: Objetivo) {
         Swal.fire({
             title: 'Desea eliminar el registro?',
             showCancelButton: true,
@@ -87,7 +105,7 @@ export class AlergiasComponent implements OnInit {
             icon: 'warning',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await firstValueFrom(this.alergiasService.delete(row.id!));
+                await firstValueFrom(this.objetivoService.delete(row.id!));
                 this.getAll();
                 this.showMessage('Registro Eliminado', 'success');
             }
