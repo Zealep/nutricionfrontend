@@ -10,7 +10,10 @@ export const routes: Routes = [
         path: '',
         component: AppLayout,
         children: [
-            { path: 'pacientes', loadComponent: () => import('./pacientes/bandeja-paciente/bandeja-paciente.component').then((c) => c.BandejaPacienteComponent) },
+            {
+                path: 'pacientes',
+                loadComponent: () => import('./pacientes/bandeja-paciente/bandeja-paciente.component').then((c) => c.BandejaPacienteComponent),
+            },
 
             // dashboard
             { path: 'alergias', loadComponent: () => import('./mantenimiento/alergias/alergias.component').then((c) => c.AlergiasComponent) },
@@ -20,6 +23,11 @@ export const routes: Routes = [
             {
                 path: 'tiempo-comida',
                 loadComponent: () => import('./mantenimiento/tiempo-comida/tiempo-comida.component').then((c) => c.TiempoComidaComponent),
+            },
+            { path: 'paciente-informacion/:id',
+                loadComponent: () => import('./pacientes/paciente-informacion/paciente-informacion.component').then((c) => c.PacienteInformacionComponent) ,
+                loadChildren: () => import('./pacientes/paciente-informacion/paciente-informacion.routing').then(m => m.routes)
+
             },
         ],
     },

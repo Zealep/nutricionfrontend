@@ -30,7 +30,7 @@
                     nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
                 >
                     <ng-template slot="id" let-value="data">
-                        <a class="font-semibold text-primary underline hover:no-underline">#{{ value.id }}</a>
+                        <a class="font-semibold text-primary underline hover:no-underline" (click)="ver(value.id)">#{{ value.id }}</a>
                     </ng-template>
 
                     <ng-template slot="apellidos" let-value="data">
@@ -80,11 +80,11 @@
                             <label for="sexo">Sexo</label>
                             <div class="flex gap-4">
                                 <label class="inline-flex items-center">
-                                    <input type="radio" formControlName="sexo" class="form-radio" value="Hombre" required/>
+                                    <input type="radio" formControlName="sexo" class="form-radio" value="H" required/>
                                     <span class="ml-1">Hombre</span>
                                 </label>
                                 <label class="inline-flex items-center">
-                                    <input type="radio" formControlName="sexo" class="form-radio" value="Mujer" />
+                                    <input type="radio" formControlName="sexo" class="form-radio" value="M" />
                                     <span class="ml-1">Mujer</span>
                                 </label>
                             </div>
@@ -106,7 +106,7 @@
 
                     <div class="mt-8 flex items-center justify-end">
                         <button type="button" class="btn btn-outline-danger" (click)="addModal.close()">Cancelar</button>
-                        <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" (click)="guardar()">Registrar</button>
+                        <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4">Registrar</button>
                     </div>
                 </form>
             </ng-template>

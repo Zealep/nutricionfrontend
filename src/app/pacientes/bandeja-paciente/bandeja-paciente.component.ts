@@ -9,7 +9,8 @@ import { NgxCustomModalComponent } from 'ngx-custom-modal';
 import { FlatpickrDefaultsInterface, FlatpickrDirective, provideFlatpickrDefaults } from 'angularx-flatpickr';
 import { Spanish } from 'flatpickr/dist/l10n/es.js';
 import { ToastService } from 'src/app/service/toast.service';
-import { log } from 'console';
+import { toIsoDate } from 'src/app/utils/convert';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-bandeja-paciente',
@@ -22,6 +23,7 @@ export class BandejaPacienteComponent {
     private readonly pacientesService = inject(PacienteService);
     private readonly fb = inject(FormBuilder);
     private toastService = inject(ToastService);
+    private router = inject(Router);
     pacientes = signal<Paciente[]>([]);
     @ViewChild('datatable') datatable: any;
     @ViewChild('addModal') addModal!: NgxCustomModalComponent;
@@ -81,17 +83,22 @@ export class BandejaPacienteComponent {
             apellidos: this.params.value.apellidos,
             nombres: this.params.value.nombres,
             sexo: this.params.value.sexo,
-            fechaNacimiento: this.params.value.fechaNacimiento,
+            fechaNacimiento: toIsoDate(this.params.value.fechaNacimiento),
             celular: this.params.value.celular,
             correo: this.params.value.correo,
         };
-        this.pacientesService.save(req).subscribe((data) => {
-            this.getAll();
-            this.toastService.showMessage('Registro guardado', 'success');
+
+        this.pacientesService.save(req).subscribe( (data: any) => {
+            this.toastService.showMessage('Paciente guardado', 'success');
             this.addModal.close();
+            this.router.navigate(['/paciente-informacion', data.id]);
         }
         );
 
+    }
+
+    ver(id: number) {
+        this.router.navigate(['/paciente-informacion', id]);
     }
 
 
