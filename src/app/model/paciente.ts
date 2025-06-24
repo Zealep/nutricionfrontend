@@ -13,5 +13,12 @@ export interface Paciente {
     actividadFisica?: string;
     peso?: number;
     talla?: number;
+    nivelEstres?: string;
+    motivoEstres?: string;
+    nivelCalidadSueño?: string;
+    consumoAlcohol?: string;
+    consumoTabaco?: string;
+    consumoCafe?: string;
+    consumoSuplementos?: string;
 
 }
