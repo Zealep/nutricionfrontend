@@ -1,24 +1,24 @@
 <div>
-    <form [formGroup]="params" class="text-sm" ngNativeValidate>
+    <form [formGroup]="params" class="text-sm bg-white p-8 rounded shadow max-w-md w-full" ngNativeValidate>
         <div class="mb-5">
             <label for="apellidos">Apellidos</label>
-            <input id="apellidos" type="text" class="form-input" formControlName="apellidos" required />
+            <input id="apellidos" type="text" class="form-input" formControlName="apellidos" required (blur)="actualizarDatos()" />
         </div>
 
         <div class="mb-5">
             <label for="nombres">Nombres</label>
-            <input id="nombres" type="text" class="form-input" formControlName="nombres" required />
+            <input id="nombres" type="text" class="form-input" formControlName="nombres" required (blur)="actualizarDatos()" />
         </div>
 
         <div class="mb-5">
             <label for="sexo">Sexo</label>
             <div class="flex gap-4">
                 <label class="inline-flex items-center">
-                    <input type="radio" formControlName="sexo" class="form-radio" value="H" required />
+                    <input type="radio" formControlName="sexo" class="form-radio" value="H" required (blur)="actualizarDatos()" />
                     <span class="ml-1">Hombre</span>
                 </label>
                 <label class="inline-flex items-center">
-                    <input type="radio" formControlName="sexo" class="form-radio" value="M" />
+                    <input type="radio" formControlName="sexo" class="form-radio" value="M" (blur)="actualizarDatos()" />
                     <span class="ml-1">Mujer</span>
                 </label>
             </div>
@@ -26,17 +26,52 @@
 
         <div class="mb-5">
             <label for="fechaNacimiento">Fecha de Nacimiento</label>
-            <input type="text" mwlFlatpickr [options]="basic" formControlName="fechaNacimiento" class="form-input" placeholder="dd/MM/yyyy" />
+            <input
+                type="text"
+                mwlFlatpickr
+                [options]="basic"
+                formControlName="fechaNacimiento"
+                class="form-input"
+                placeholder="dd/MM/yyyy"
+                (blur)="actualizarDatos()"
+            />
         </div>
 
         <div class="mb-5">
             <label for="celular">Celular</label>
-            <input id="celular" type="text" class="form-input" formControlName="celular" />
+            <input id="celular" type="text" class="form-input" formControlName="celular" (blur)="actualizarDatos()" />
         </div>
 
         <div class="mb-5">
             <label for="correo">Correo</label>
-            <input id="correo" type="text" class="form-input" formControlName="correo" />
+            <input id="correo" type="text" class="form-input" formControlName="correo" (blur)="actualizarDatos()" />
         </div>
+
+        <div class="mb-5">
+            <label for="direccion">Direccion</label>
+            <input id="direccion" type="text" class="form-input" formControlName="direccion" (blur)="actualizarDatos()" />
+        </div>
+
+        <div class="mb-5">
+            <label for="direccion">Direccion</label>
+            <input id="direccion" type="text" class="form-input" formControlName="direccion" (blur)="actualizarDatos()" />
+        </div>
+
+        <div class="mb-5">
+            <label for="estadoCivil">Estado Civil</label>
+            <ng-select formControlName="estadoCivil" [items]="estadosCiviles" bindLabel="label" bindValue="value">
+            </ng-select>
+        </div>
+
+        <div class="mb-5">
+            <label for="numeroDocumento">Numero de Documento</label>
+            <input id="numeroDocumento" type="text" class="form-input" formControlName="numeroDocumento" (blur)="actualizarDatos()" />
+        </div>
+
+        <div class="mb-5">
+            <label for="ocupacion">Ocupacion</label>
+            <input id="ocupacion" type="text" class="form-input" formControlName="ocupacion" (blur)="actualizarDatos()" />
+        </div>
+
     </form>
 </div>

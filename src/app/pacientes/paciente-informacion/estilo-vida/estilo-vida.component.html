@@ -1,1 +1,17 @@
-<p>estilo-vida works!</p>,
+<div>
+    <form [formGroup]="params" class="text-sm bg-white p-8 rounded shadow max-w-md w-full" ngNativeValidate>
+        
+        <div class="mb-5">
+            <label for="actividadFisica">Actividad Física</label>
+            <ng-select formControlName="actividadFisica" [items]="actividades" bindLabel="label" bindValue="value">
+            </ng-select>
+            
+        </div>
+
+        <div class="mb-5">
+            <ng-select>
+                <ng-option value=""></ng-option>
+            </ng-select>
+        </div>
+    </form>
+</div>
