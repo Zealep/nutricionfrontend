@@ -15,10 +15,8 @@ import { toIsoDate } from 'src/app/utils/convert';
 @Component({
     selector: 'app-datos-personales',
     standalone: true,
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, FlatpickrDirective,NgLabelTemplateDirective,
-    NgOptionTemplateDirective,
-    NgSelectComponent],
-     providers: [provideFlatpickrDefaults()],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, FlatpickrDirective, NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent],
+    providers: [provideFlatpickrDefaults()],
     templateUrl: './datos-personales.component.html',
 })
 export class DatosPersonalesComponent {
@@ -26,14 +24,14 @@ export class DatosPersonalesComponent {
     private readonly fb = inject(FormBuilder);
     private readonly toastService = inject(ToastService);
     private router = inject(Router);
-    private route = inject(ActivatedRoute)
+    private route = inject(ActivatedRoute);
 
     estadosCiviles = [
-  { label: 'SOLTERO', value: 'S' },
-  { label: 'CASADO', value: 'C' },
-  { label: 'DIVORCIADO', value: 'D' },
-  { label: 'VIUDO', value: 'V' }
-];
+        { label: 'SOLTERO', value: 'S' },
+        { label: 'CASADO', value: 'C' },
+        { label: 'DIVORCIADO', value: 'D' },
+        { label: 'VIUDO', value: 'V' },
+    ];
 
     paciente = signal<Paciente>({
         apellidos: '',
@@ -56,31 +54,32 @@ export class DatosPersonalesComponent {
         };
     }
 
-     ngOnInit() {
+    ngOnInit() {
         this.initForm();
     }
 
     initForm() {
-       this.params = this.fb.group({
-           apellidos: [''],
-           nombres: [''],
-           sexo: [''],
-           fechaNacimiento: [''],
-           celular: [''],
-           correo: [''],
-       });
+        this.params = this.fb.group({
+            apellidos: [''],
+            nombres: [''],
+            sexo: [''],
+            fechaNacimiento: [''],
+            celular: [''],
+            correo: [''],
+            direccion: [''],
+            estadoCivil: [''],
+            numeroDocumento: [''],
+            ocupacion: [''],
+        });
 
-       this.asignarPaciente()
+        this.asignarPaciente();
     }
 
-    async asignarPaciente(){
+    async asignarPaciente() {
         const paciente = await firstValueFrom(this.pacientesService.getById(this.route.snapshot.params['id']));
         this.paciente.set(paciente);
         this.params.patchValue(paciente);
-
     }
-
-
 
     actualizarDatos() {
         const paciente: Paciente = {
@@ -89,11 +88,8 @@ export class DatosPersonalesComponent {
             fechaNacimiento: this.params.value.fechaNacimiento ? toIsoDate(this.params.value.fechaNacimiento) : '',
         };
 
-        this.pacientesService.save(paciente)
-        .subscribe(x=>{
+        this.pacientesService.save(paciente).subscribe((x) => {
             this.toastService.showMessage('Datos actualizados correctamente');
-            
-        })
-
+        });
     }
 }

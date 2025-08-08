@@ -53,11 +53,6 @@
         </div>
 
         <div class="mb-5">
-            <label for="direccion">Direccion</label>
-            <input id="direccion" type="text" class="form-input" formControlName="direccion" (blur)="actualizarDatos()" />
-        </div>
-
-        <div class="mb-5">
             <label for="estadoCivil">Estado Civil</label>
             <ng-select formControlName="estadoCivil" [items]="estadosCiviles" bindLabel="label" bindValue="value">
             </ng-select>
