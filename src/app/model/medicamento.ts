@@ -1,4 +1,4 @@
 export interface Medicamento{
-    id: number;
+    id?: number;
     descripcion: string;
 }

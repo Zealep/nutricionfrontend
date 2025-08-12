@@ -1,4 +1,4 @@
 export interface Patologia {
-    id: number;
+    id?: number;
     descripcion: string;
 }

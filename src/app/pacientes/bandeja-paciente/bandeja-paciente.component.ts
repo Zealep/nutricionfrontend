@@ -43,8 +43,8 @@ export class BandejaPacienteComponent {
 
     constructor() {
         this.basic = {
-            dateFormat: 'd/m/Y',
-            allowInput: true,
+            //dateFormat: 'd/m/Y',
+            //allowInput: true,
             // position: this.store.rtlClass === 'rtl' ? 'auto right' : 'auto left',
             monthSelectorType: 'dropdown',
             locale: Spanish,
@@ -83,7 +83,7 @@ export class BandejaPacienteComponent {
             apellidos: this.params.value.apellidos,
             nombres: this.params.value.nombres,
             sexo: this.params.value.sexo,
-            fechaNacimiento: toIsoDate(this.params.value.fechaNacimiento),
+            fechaNacimiento: this.params.value.fechaNacimiento,
             celular: this.params.value.celular,
             correo: this.params.value.correo,
         };

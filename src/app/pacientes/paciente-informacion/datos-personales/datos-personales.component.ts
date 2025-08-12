@@ -46,9 +46,6 @@ export class DatosPersonalesComponent {
 
     constructor() {
         this.basic = {
-            dateFormat: 'd/m/Y',
-            allowInput: true,
-            // position: this.store.rtlClass === 'rtl' ? 'auto right' : 'auto left',
             monthSelectorType: 'dropdown',
             locale: Spanish,
         };
@@ -85,11 +82,13 @@ export class DatosPersonalesComponent {
         const paciente: Paciente = {
             ...this.paciente(),
             ...this.params.value,
-            fechaNacimiento: this.params.value.fechaNacimiento ? toIsoDate(this.params.value.fechaNacimiento) : '',
         };
 
         this.pacientesService.save(paciente).subscribe((x) => {
             this.toastService.showMessage('Datos actualizados correctamente');
         });
+    }
+    onFechaChange() {
+        setTimeout(() => this.actualizarDatos());
     }
 }

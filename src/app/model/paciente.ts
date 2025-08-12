@@ -1,8 +1,12 @@
+import { Alergia } from "./alergias";
+import { Medicamento } from "./medicamento";
+import { Patologia } from "./patologia";
+
 export interface Paciente {
     id?: number;
     apellidos: string;
     nombres: string;
-    fechaNacimiento: string;
+    fechaNacimiento: '';
     sexo: string;
     celular: string;
     direccion?: string;
@@ -20,5 +24,11 @@ export interface Paciente {
     consumoTabaco?: string;
     consumoCafe?: string;
     consumoSuplementos?: string;
+    patologias?: Patologia[];
+    antecedentesPatologicos?: Patologia[];
+    antecedentesPatologicosFamiliares?: Patologia[];
+    alergias?: Alergia[];
+    medicamentos?: Medicamento[];
+    observaciones?: string;
 
 }

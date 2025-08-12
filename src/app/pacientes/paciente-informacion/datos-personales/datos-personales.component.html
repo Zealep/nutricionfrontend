@@ -1,5 +1,5 @@
 <div>
-    <form [formGroup]="params" class="text-sm bg-white p-8 rounded shadow max-w-md w-full" ngNativeValidate>
+    <form [formGroup]="params" class="text-sm bg-white p-8 rounded shadow max-w-lg w-full" ngNativeValidate>
         <div class="mb-5">
             <label for="apellidos">Apellidos</label>
             <input id="apellidos" type="text" class="form-input" formControlName="apellidos" required (blur)="actualizarDatos()" />
@@ -14,11 +14,11 @@
             <label for="sexo">Sexo</label>
             <div class="flex gap-4">
                 <label class="inline-flex items-center">
-                    <input type="radio" formControlName="sexo" class="form-radio" value="H" required (blur)="actualizarDatos()" />
+                    <input type="radio" formControlName="sexo" class="form-radio" value="H" required (change)="actualizarDatos()" />
                     <span class="ml-1">Hombre</span>
                 </label>
                 <label class="inline-flex items-center">
-                    <input type="radio" formControlName="sexo" class="form-radio" value="M" (blur)="actualizarDatos()" />
+                    <input type="radio" formControlName="sexo" class="form-radio" value="M" (change)="actualizarDatos()" />
                     <span class="ml-1">Mujer</span>
                 </label>
             </div>
@@ -33,7 +33,7 @@
                 formControlName="fechaNacimiento"
                 class="form-input"
                 placeholder="dd/MM/yyyy"
-                (blur)="actualizarDatos()"
+                (change)="onFechaChange()"
             />
         </div>
 
@@ -54,7 +54,13 @@
 
         <div class="mb-5">
             <label for="estadoCivil">Estado Civil</label>
-            <ng-select formControlName="estadoCivil" [items]="estadosCiviles" bindLabel="label" bindValue="value">
+            <ng-select formControlName="estadoCivil" [items]="estadosCiviles" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
+                <ng-template ng-label-tmp let-item="item">
+                    {{ item.label }}
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item">
+                    {{ item.label }}
+                </ng-template>
             </ng-select>
         </div>
 

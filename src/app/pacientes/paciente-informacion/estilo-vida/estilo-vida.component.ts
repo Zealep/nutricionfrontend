@@ -86,11 +86,11 @@ export class EstiloVidaComponent {
               actividadFisica: [''],
                 nivelEstres: [''],
                 motivoEstres: [''],
-                nivelSueño: [''],
+                nivelCalidadSueño: [''],
                 consumoAlcohol: [''],
                 consumoTabaco: [''],
                 consumoCafe: [''],
-                suplementos: [''],
+                consumoSuplementos: [''],
        });
 
        this.asignarPaciente()
@@ -104,7 +104,15 @@ export class EstiloVidaComponent {
     }
 
 
-    actualizarDatos() {
+     actualizarDatos() {
+        const paciente: Paciente = {
+            ...this.paciente(),
+            ...this.params.value,
+        };
+
+        this.pacientesService.save(paciente).subscribe((x) => {
+            this.toastService.showMessage('Datos actualizados correctamente');
+        });
     }
 
 }

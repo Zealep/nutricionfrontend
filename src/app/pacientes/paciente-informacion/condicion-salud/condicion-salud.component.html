@@ -1,1 +1,62 @@
-<p>condicion-salud works!</p>,
+<div>
+    <form [formGroup]="params" class="text-sm bg-white p-8 rounded shadow max-w-5xl w-full" ngNativeValidate>
+
+        <div class="mb-5">
+            <label for="patologias">Condiciones patologicas actuales</label>
+            <ng-select formControlName="patologias" [items]="patologias" [multiple]="true" [clearable]="false"
+                class="custom-multiselect" bindLabel="descripcion"
+                [addTag]="true" [addTagText]="'Agregar nuevo'"
+                (add)="onAddPatologia($event)"
+                (remove)="onRemovePatologia($event)"
+                >
+            </ng-select>
+
+        </div>
+
+        <div class="mb-5">
+            <label for="antecedentesPatologicos">Antecedentes patologicos</label>
+            <ng-select formControlName="antecedentesPatologicos" [items]="patologias" [multiple]="true" [clearable]="false"
+                class="custom-multiselect" bindLabel="descripcion"
+                (remove)="onRemoveAntecedentePatologia($event)"
+                (add)="onAddPatologiaAntecedente($event)">
+            </ng-select>
+
+        </div>
+
+         <div class="mb-5">
+            <label for="antecedentesPatologicosFamiliares">Antecedentes patologicos familiares</label>
+            <ng-select formControlName="antecedentesPatologicosFamiliares" [items]="patologias" [multiple]="true" [clearable]="false"
+                class="custom-multiselect" bindLabel="descripcion"
+                (remove)="onRemoveAntecedenteFamiliar($event)"
+                (add)="onAddPatologiaAntecedenteFamiliar($event)">
+            </ng-select>
+
+        </div>
+
+        <div class="mb-5">
+            <label for="alergias">Alergias</label>
+            <ng-select formControlName="alergias" [items]="alergias" [multiple]="true" [clearable]="false"
+                class="custom-multiselect" bindLabel="descripcion"
+                (remove)="onRemoveAlergia($event)"
+                (add)="onAddAlergia($event)">
+            </ng-select>
+
+        </div>
+
+        <div class="mb-5">
+            <label for="medicamentos">Medicamentos</label>
+            <ng-select formControlName="medicamentos" [items]="medicamentos" [multiple]="true" [clearable]="false"
+                class="custom-multiselect" bindLabel="descripcion"
+                (remove)="onRemoveMedicamento($event)"
+                (add)="onAddMedicamento($event)">
+            </ng-select>
+
+        </div>
+
+        <div class="mb-5">
+            <label for="observaciones">Observaciones</label>
+            <textarea formControlName="observaciones" class="form-textarea" placeholder="Ingrese sus observaciones" (blur)="actualizarDatos()"></textarea>
+        </div>
+
+    </form>
+</div>

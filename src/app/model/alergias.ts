@@ -1,4 +1,4 @@
 export interface Alergia {
-    id:number;
+    id?:number;
     descripcion: string;
 }

@@ -1,47 +1,47 @@
 <div>
-    <form [formGroup]="params" class="text-sm bg-white p-8 rounded shadow max-w-md w-full" ngNativeValidate>
+    <form [formGroup]="params" class="text-sm bg-white p-8 rounded shadow max-w-lg w-full" ngNativeValidate>
 
         <div class="mb-5">
             <label for="actividadFisica">Actividad Física</label>
-            <ng-select formControlName="actividadFisica" [items]="actividades" bindLabel="label" bindValue="value">
+            <ng-select formControlName="actividadFisica" [items]="actividades" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
             </ng-select>
 
         </div>
 
         <div class="mb-5">
             <label for="nivelEstres">Nivel de Estres</label>
-            <ng-select formControlName="nivelEstres" [items]="nivelesEstres" bindLabel="label" bindValue="value">
+            <ng-select formControlName="nivelEstres" [items]="nivelesEstres" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
             </ng-select>
         </div>
 
         <div class="mb-5">
             <label for="motivoEstres">Motivo Estres</label>
-            <input id="motivoEstres" type="text" class="form-input" formControlName="motivoEstres" (blur)="actualizarDatos()" />
+            <textarea id="motivoEstres" class="form-input" formControlName="motivoEstres" (blur)="actualizarDatos()"></textarea>
         </div>
 
         <div class="mb-5">
-            <label for="nivelSueño">Nivel Calidad Sueño</label>
-            <ng-select formControlName="nivelSueño" [items]="nivelesDormir" bindLabel="label" bindValue="value">
+            <label for="nivelCalidadSueño">Nivel Calidad Sueño</label>
+            <ng-select formControlName="nivelCalidadSueño" [items]="nivelesDormir" bindLabel="label" bindValue="value">
             </ng-select>
         </div>
         <div class="mb-5">
             <label for="consumoAlcohol">Frecuencia Consumo de Alcohol</label>
-            <ng-select formControlName="consumoAlcohol" [items]="consumosAlcohol" bindLabel="label" bindValue="value">
+            <ng-select formControlName="consumoAlcohol" [items]="consumosAlcohol" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
             </ng-select>
         </div>
         <div class="mb-5">
             <label for="consumoTabaco">Frecuencia Consumo de Tabaco</label>
-            <ng-select formControlName="consumoTabaco" [items]="consumosTabaco" bindLabel="label" bindValue="value">
+            <ng-select formControlName="consumoTabaco" [items]="consumosTabaco" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
             </ng-select>
         </div>
         <div class="mb-5">
             <label for="consumoCafe">Frecuencia Consumo de Cafe</label>
-            <ng-select formControlName="consumoCafe" [items]="consumosCafe" bindLabel="label" bindValue="value">
+            <ng-select formControlName="consumoCafe" [items]="consumosCafe" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
             </ng-select>
         </div>
         <div class="mb-5">
-            <label for="suplementos">Suplementos</label>
-            <textarea id="suplementos" class="form-input" formControlName="suplementos" rows="3" (blur)="actualizarDatos()"></textarea>
+            <label for="consumoSuplementos">Suplementos</label>
+            <textarea id="consumoSuplementos" class="form-input" formControlName="consumoSuplementos" rows="3" (blur)="actualizarDatos()"></textarea>
         </div>
     </form>
 </div>
