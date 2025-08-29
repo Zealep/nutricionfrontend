@@ -1,47 +1,48 @@
-<div>
-    <form [formGroup]="params" class="text-sm bg-white p-8 rounded shadow max-w-lg w-full" ngNativeValidate>
+<div class="text-sm bg-white p-8 max-w-lg w-full">
 
-        <div class="mb-5">
-            <label for="actividadFisica">Actividad Física</label>
-            <ng-select formControlName="actividadFisica" [items]="actividades" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
+    <form [formGroup]="params" class="space-y-5" ngNativeValidate>
+
+        <div class="flex sm:flex-row flex-col">
+            <label for="actividadFisica" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Actividad Física</label>
+            <ng-select formControlName="actividadFisica" [items]="actividades" bindLabel="label" bindValue="value" (change)="actualizarDatos()" class="flex-1">
             </ng-select>
 
-        </div>
-
-        <div class="mb-5">
-            <label for="nivelEstres">Nivel de Estres</label>
-            <ng-select formControlName="nivelEstres" [items]="nivelesEstres" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
-            </ng-select>
         </div>
 
-        <div class="mb-5">
-            <label for="motivoEstres">Motivo Estres</label>
-            <textarea id="motivoEstres" class="form-input" formControlName="motivoEstres" (blur)="actualizarDatos()"></textarea>
+        <div class="flex sm:flex-row flex-col">
+            <label for="nivelEstres" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Nivel de Estres</label>
+            <ng-select formControlName="nivelEstres" [items]="nivelesEstres" bindLabel="label" bindValue="value" (change)="actualizarDatos()" class="flex-1">
+            </ng-select>
         </div>
 
-        <div class="mb-5">
-            <label for="nivelCalidadSueño">Nivel Calidad Sueño</label>
-            <ng-select formControlName="nivelCalidadSueño" [items]="nivelesDormir" bindLabel="label" bindValue="value">
+        <div class="flex sm:flex-row flex-col">
+            <label for="motivoEstres" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Motivo Estres</label>
+            <textarea id="motivoEstres" class="form-input flex-1" formControlName="motivoEstres" (blur)="actualizarDatos()"></textarea>
+        </div>
+
+        <div class="flex sm:flex-row flex-col">
+            <label for="nivelCalidadSueño" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Nivel Calidad Sueño</label>
+            <ng-select formControlName="nivelCalidadSueño" [items]="nivelesDormir" bindLabel="label" bindValue="value" class="flex-1">
             </ng-select>
         </div>
-        <div class="mb-5">
-            <label for="consumoAlcohol">Frecuencia Consumo de Alcohol</label>
-            <ng-select formControlName="consumoAlcohol" [items]="consumosAlcohol" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
+        <div class="flex sm:flex-row flex-col mb-5">
+            <label for="consumoAlcohol" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Frecuencia Consumo de Alcohol</label>
+            <ng-select formControlName="consumoAlcohol" [items]="consumosAlcohol" bindLabel="label" bindValue="value" (change)="actualizarDatos()" class="flex-1">
             </ng-select>
         </div>
-        <div class="mb-5">
-            <label for="consumoTabaco">Frecuencia Consumo de Tabaco</label>
-            <ng-select formControlName="consumoTabaco" [items]="consumosTabaco" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
+        <div class="flex sm:flex-row flex-col mb-5">
+            <label for="consumoTabaco" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Frecuencia Consumo de Tabaco</label>
+            <ng-select formControlName="consumoTabaco" [items]="consumosTabaco" bindLabel="label" bindValue="value" (change)="actualizarDatos()" class="flex-1">
             </ng-select>
         </div>
-        <div class="mb-5">
-            <label for="consumoCafe">Frecuencia Consumo de Cafe</label>
-            <ng-select formControlName="consumoCafe" [items]="consumosCafe" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
+        <div class="flex sm:flex-row flex-col mb-5">
+            <label for="consumoCafe" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Frecuencia Consumo de Cafe</label>
+            <ng-select formControlName="consumoCafe" [items]="consumosCafe" bindLabel="label" bindValue="value" (change)="actualizarDatos()" class="flex-1">
             </ng-select>
         </div>
-        <div class="mb-5">
-            <label for="consumoSuplementos">Suplementos</label>
-            <textarea id="consumoSuplementos" class="form-input" formControlName="consumoSuplementos" rows="3" (blur)="actualizarDatos()"></textarea>
+        <div class="flex sm:flex-row flex-col mb-5">
+            <label for="consumoSuplementos" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Suplementos</label>
+            <textarea id="consumoSuplementos" class="form-input flex-1" formControlName="consumoSuplementos" rows="3" (blur)="actualizarDatos()"></textarea>
         </div>
     </form>
 </div>

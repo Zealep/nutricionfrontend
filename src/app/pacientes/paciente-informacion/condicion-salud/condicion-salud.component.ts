@@ -31,9 +31,9 @@ export class CondicionSaludComponent {
     private router = inject(Router);
     private route = inject(ActivatedRoute);
     params!: FormGroup;
-    patologias: Patologia[] = [];
-    alergias: Alergia[] = [];
-    medicamentos: Medicamento[] = [];
+    patologias =  signal<Patologia[]>([])
+    alergias = signal<Alergia[]>([]);
+    medicamentos = signal<Medicamento[]>([]);
 
     paciente = signal<Paciente>({
         apellidos: '',
@@ -43,6 +43,7 @@ export class CondicionSaludComponent {
         celular: '',
         correo: '',
     });
+
 
     ngOnInit() {
         this.initForm();
@@ -72,19 +73,19 @@ export class CondicionSaludComponent {
 
     obtenerPatologias() {
         this.patologiaService.getAll().subscribe((patologias) => {
-            this.patologias = patologias;
+            this.patologias.set(patologias);
         });
     }
 
     obtenerAlergias() {
         this.alergiaService.getAll().subscribe((alergias) => {
-            this.alergias = alergias;
+            this.alergias.set(alergias);
         });
     }
 
     obtenerMedicamentos() {
         this.medicamentoService.getAll().subscribe((medicamentos) => {
-            this.medicamentos = medicamentos;
+            this.medicamentos.set(medicamentos);
         });
     }
 //patologia opcional
@@ -104,7 +105,7 @@ export class CondicionSaludComponent {
    async onAddPatologia(patologia: Patologia) {
     // Guarda la nueva patología en el backend y espera la respuesta con el id
     const nuevaPatologia = await firstValueFrom(this.patologiaService.save({ descripcion: patologia.descripcion })) as Patologia;
-    this.patologias = [...this.patologias, nuevaPatologia];
+    this.patologias.set([...this.patologias(), nuevaPatologia]);
     const seleccionados = this.params.value.patologias || [];
     const seleccionadosFiltrados = [...seleccionados, nuevaPatologia].filter(p => p.id);
     this.params.patchValue({ patologias: seleccionadosFiltrados });

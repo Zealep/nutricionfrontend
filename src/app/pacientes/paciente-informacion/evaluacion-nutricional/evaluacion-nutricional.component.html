@@ -1,1 +1,35 @@
-<p>evaluacion-nutricional works!</p>,
+<div class="text-sm bg-white p-8 max-w-lg w-full">
+    <form [formGroup]="params" class="space-y-5" ngNativeValidate>
+        <div class="flex sm:flex-row flex-col">
+            <label for="peso" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Peso KG</label>
+            <input id="peso" type="text" class="form-input flex-1" formControlName="peso" required (blur)="calcularIMC()"
+                />
+        </div>
+        <div class="flex sm:flex-row flex-col">
+            <label for="talla" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Talla CM</label>
+            <input id="talla" type="text" class="form-input flex-1" formControlName="talla" required (blur)="calcularIMC()"
+                />
+        </div>
+        <div class="flex sm:flex-row flex-col">
+            <label for="imc" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">IMC</label>
+            <input id="imc" type="text" class="form-input flex-1" formControlName="imc" required
+                />
+        </div>
+        <div class="flex sm:flex-row flex-col">
+            <label for="circunferenciaCintura" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Circunferencia Cintura</label>
+            <input id="circunferenciaCintura" type="text" class="form-input flex-1" formControlName="circunferenciaCintura" required
+                />
+        </div>
+        <div class="flex sm:flex-row flex-col">
+            <label for="circunferenciaCadera" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Circunferencia Cadera</label>
+            <input id="circunferenciaCadera" type="text" class="form-input flex-1" formControlName="circunferenciaCadera" required
+                />
+        </div>
+        <div class="flex sm:flex-row flex-col">
+            <label for="medidaCuello" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Medida Cuello</label>
+            <input id="medidaCuello" type="text" class="form-input flex-1" formControlName="medidaCuello" required
+                />
+        </div>
+
+    </form>
+</div>

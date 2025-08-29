@@ -1,17 +1,17 @@
-<div>
-    <form [formGroup]="params" class="text-sm bg-white p-8 rounded shadow max-w-lg w-full" ngNativeValidate>
-        <div class="mb-5">
-            <label for="apellidos">Apellidos</label>
-            <input id="apellidos" type="text" class="form-input" formControlName="apellidos" required (blur)="actualizarDatos()" />
+<div class="text-sm bg-white p-8 max-w-lg w-full">
+    <form [formGroup]="params" class="space-y-5" ngNativeValidate>
+        <div class="flex sm:flex-row flex-col">
+            <label for="apellidos" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Apellidos</label>
+            <input id="apellidos" type="text" class="form-input flex-1" formControlName="apellidos" required (blur)="actualizarDatos()" />
         </div>
 
-        <div class="mb-5">
-            <label for="nombres">Nombres</label>
-            <input id="nombres" type="text" class="form-input" formControlName="nombres" required (blur)="actualizarDatos()" />
+        <div class="flex sm:flex-row flex-col">
+            <label for="nombres" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Nombres</label>
+            <input id="nombres" type="text" class="form-input flex-1" formControlName="nombres" required (blur)="actualizarDatos()" />
         </div>
 
-        <div class="mb-5">
-            <label for="sexo">Sexo</label>
+        <div class="flex sm:flex-row flex-col">
+            <label for="sexo" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Sexo</label>
             <div class="flex gap-4">
                 <label class="inline-flex items-center">
                     <input type="radio" formControlName="sexo" class="form-radio" value="H" required (change)="actualizarDatos()" />
@@ -24,37 +24,37 @@
             </div>
         </div>
 
-        <div class="mb-5">
-            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+        <div class="flex sm:flex-row flex-col">
+            <label for="fechaNacimiento" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Fecha de Nacimiento</label>
             <input
                 type="text"
                 mwlFlatpickr
                 [options]="basic"
                 formControlName="fechaNacimiento"
-                class="form-input"
+                class="form-input flex-1"
                 placeholder="dd/MM/yyyy"
                 (change)="onFechaChange()"
             />
         </div>
 
-        <div class="mb-5">
-            <label for="celular">Celular</label>
-            <input id="celular" type="text" class="form-input" formControlName="celular" (blur)="actualizarDatos()" />
+        <div class="flex sm:flex-row flex-col">
+            <label for="celular" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Celular</label>
+            <input id="celular" type="text" class="form-input flex-1" formControlName="celular" (blur)="actualizarDatos()" />
         </div>
 
-        <div class="mb-5">
-            <label for="correo">Correo</label>
-            <input id="correo" type="text" class="form-input" formControlName="correo" (blur)="actualizarDatos()" />
+        <div class="flex sm:flex-row flex-col">
+            <label for="correo" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Correo</label>
+            <input id="correo" type="text" class="form-input flex-1" formControlName="correo" (blur)="actualizarDatos()" />
         </div>
 
-        <div class="mb-5">
-            <label for="direccion">Direccion</label>
-            <input id="direccion" type="text" class="form-input" formControlName="direccion" (blur)="actualizarDatos()" />
+        <div class="flex sm:flex-row flex-col">
+            <label for="direccion" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Direccion</label>
+            <input id="direccion" type="text" class="form-input flex-1" formControlName="direccion" (blur)="actualizarDatos()" />
         </div>
 
-        <div class="mb-5">
-            <label for="estadoCivil">Estado Civil</label>
-            <ng-select formControlName="estadoCivil" [items]="estadosCiviles" bindLabel="label" bindValue="value" (change)="actualizarDatos()">
+        <div class="flex sm:flex-row flex-col">
+            <label for="estadoCivil" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Estado Civil</label>
+            <ng-select formControlName="estadoCivil" [items]="estadosCiviles" bindLabel="label" bindValue="value" (change)="actualizarDatos()" class="flex-1">
                 <ng-template ng-label-tmp let-item="item">
                     {{ item.label }}
                 </ng-template>
@@ -64,14 +64,14 @@
             </ng-select>
         </div>
 
-        <div class="mb-5">
-            <label for="numeroDocumento">Numero de Documento</label>
-            <input id="numeroDocumento" type="text" class="form-input" formControlName="numeroDocumento" (blur)="actualizarDatos()" />
+        <div class="flex sm:flex-row flex-col mb-5">
+            <label for="numeroDocumento" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Numero de Documento</label>
+            <input id="numeroDocumento" type="text" class="form-input flex-1" formControlName="numeroDocumento" (blur)="actualizarDatos()" />
         </div>
 
-        <div class="mb-5">
-            <label for="ocupacion">Ocupacion</label>
-            <input id="ocupacion" type="text" class="form-input" formControlName="ocupacion" (blur)="actualizarDatos()" />
+        <div class="flex sm:flex-row flex-col mb-5">
+            <label for="ocupacion" class="mb-0 sm:w-1/4 sm:ltr:mr-2 rtl:ml-2">Ocupacion</label>
+            <input id="ocupacion" type="text" class="form-input flex-1" formControlName="ocupacion" (blur)="actualizarDatos()" />
         </div>
 
     </form>
